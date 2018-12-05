@@ -1,0 +1,17 @@
+{
+    "name": "sunat_ruc",
+    "version": "1.0.0",
+    "description": "Web service to consult information from SUNAT.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server/server",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Cristhian Chacalcaje",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.4",
+        "scraper-ruc-sunat": "^1.2.2",
+        "sunat-ruc-scraper2": "^1.0.1"
+    }
+}
