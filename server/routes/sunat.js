@@ -4,6 +4,16 @@ const express = require('express');
 
 const app = express();
 
+const getUbigeo = (data) => {
+    let textArray = data.direccion_referencia.split('-');
+    if (textArray.length < 3)
+        return;
+    let departamentoArray = textArray[textArray.length - 3].split(' ');
+    data.departamento = departamentoArray[departamentoArray.length - 1];
+    data.provincia = textArray[textArray.length - 2];
+    data.distrito = textArray[textArray.length - 1];
+}
+
 app.get('/sunat/:ruc', (req, res) => {
     let ruc = req.params.ruc;
     scraper.getInformation(ruc, (err, data) => {
@@ -13,6 +23,7 @@ app.get('/sunat/:ruc', (req, res) => {
                 error: err
             });
         }
+        getUbigeo(data);
         res.json({
             sucess: true,
             data
@@ -29,6 +40,7 @@ app.get('/sunat/all/:ruc', (req, res) => {
                 error: err
             });
         }
+        getUbigeo(data);
         res.json({
             sucess: true,
             data
