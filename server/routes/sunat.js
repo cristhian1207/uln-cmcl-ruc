@@ -19,10 +19,13 @@ app.get('/sunat/:ruc', (req, res) => {
     scraper.getInformation(ruc, (err, data) => {
         if (err) {
             return res.status(400).json({
-                sucess: false,
+                success: false,
                 error: err
             });
         }
+        data.razon_social = data.razon_social.replace(/,/g, '');
+        data.nombre_comercial = data.nombre_comercial.replace(/,/g, '');
+        data.direccion_referencia = data.direccion_referencia.replace(/,/g, '');
         getUbigeo(data);
         res.json({
             sucess: true,
@@ -36,10 +39,12 @@ app.get('/sunat/all/:ruc', (req, res) => {
     scraper.getAllInformation(ruc, (err, data) => {
         if (err) {
             return res.status(400).json({
-                sucess: false,
+                success: false,
                 error: err
             });
         }
+        data.razon_social = data.razon_social.replace(/,/g, '');
+        data.direccion_referencia = data.direccion_referencia.replace(/,/g, '');
         getUbigeo(data);
         res.json({
             sucess: true,
@@ -54,7 +59,7 @@ app.get('/sunat/repleg/:ruc/:razsoc', (req, res) => {
     sunat.getRepLeg(ruc, razsoc, (err, data) => {
         if (err) {
             return res.status(400).json({
-                sucess: false,
+                success: false,
                 error: err
             });
         }
@@ -71,7 +76,7 @@ app.get('/sunat/locaanex/:ruc/:razsoc', (req, res) => {
     sunat.getLocAnex(ruc, razsoc, (err, data) => {
         if (err) {
             return res.status(400).json({
-                sucess: false,
+                success: false,
                 error: err
             });
         }
@@ -88,7 +93,7 @@ app.get('/sunat/cantrab/:ruc/:razsoc', (req, res) => {
     sunat.getCantTrab(ruc, razsoc, (err, data) => {
         if (err) {
             return res.status(400).json({
-                sucess: false,
+                success: false,
                 error: err
             });
         }
@@ -105,7 +110,7 @@ app.get('/sunat/actpro/:ruc/:razsoc', (req, res) => {
     sunat.getActPro(ruc, razsoc, (err, data) => {
         if (err) {
             return res.status(400).json({
-                sucess: false,
+                success: false,
                 error: err
             });
         }
@@ -122,7 +127,7 @@ app.get('/sunat/infhis/:ruc/:razsoc', (req, res) => {
     sunat.getInfHis(ruc, razsoc, (err, data) => {
         if (err) {
             return res.status(400).json({
-                sucess: false,
+                success: false,
                 error: err
             });
         }
